@@ -124,9 +124,13 @@
             {{ isNaN(userNetWorth.toFixed(2)) ? "-" : userNetWorth.toFixed(2) }}
           </div>
           <div class="amt-wrap-2">
-            <div class="wrap">
-              <div class="label">Amount:</div>
-              <div class="amt">400.00 USD</div>
+            <div v-if="marketType" class="wrap">
+              <div class="label">Buy Amount (Market):</div>
+              <div class="amt">{{ currentPrice }} USD</div>
+            </div>
+            <div v-else class="wrap">
+              <div class="label">Buy Amount (Limit):</div>
+              <input type="text" class="amt" v-model="limitAmt" />
             </div>
             <!-- <div class="wrap">
               <div class="label">Limit:</div>
@@ -137,8 +141,8 @@
         <div class="action-buttons">
           <button class="limit" @click="marketType = !marketType">
             <img src="../assets/limit-icon.png" alt="" />
-            <span v-if="marketType">Limit </span>
-            <span v-else>Market</span>
+            <span v-if="marketType">Market </span>
+            <span v-else>Limit</span>
           </button>
           <button class="buy" @click="buy()">Buy</button>
           <button class="sell" @click="sell()">Sell</button>
@@ -873,24 +877,41 @@ let userAssets = ref(0);
 let netWorth = ref(userAssets * currentPrice);
 let userNetWorth = ref(netWorth);
 let marketType = ref(true);
-
+let limitAmt = ref(currentPrice.value);
+let buyAmt = ref(0);
 function buy() {
   console.log("buy");
-  if (userFunds.value > parseInt(currentPrice.value)) {
-    userAssets.value = userAssets.value + 1;
-    userFunds.value = userFunds.value - currentPrice.value;
-    netWorth.value = userAssets.value * currentPrice.value;
-    // console.log(netWorth.value);
+  if (marketType.value) {
+    if (userFunds.value > parseInt(currentPrice.value)) {
+      userAssets.value = userAssets.value + 1;
+      userFunds.value = userFunds.value - currentPrice.value;
+      netWorth.value = userAssets.value * currentPrice.value;
+      // console.log(netWorth.value);
+    }
+  } else {
+    console.log(limitAmt.value)
+    if (userFunds.value > parseInt(limitAmt.value)) {
+      buyAmt.value = parseInt(limitAmt.value) / currentPrice.value;
+      userAssets.value = userAssets.value + buyAmt.value;
+      userFunds.value = userFunds.value - limitAmt.value;
+      netWorth.value = userAssets.value * currentPrice.value;
+    }
   }
 }
 
 function sell() {
-  if (userAssets.value > 0) {
+  if (userAssets.value > 1) {
     userAssets.value = userAssets.value - 1;
     // console.log(userFunds.value, currentPrice.value);
     netWorth.value = userAssets.value * currentPrice.value;
     userFunds.value = userFunds.value + parseInt(currentPrice.value);
     // console.log(netWorth.value);
+  }else if(userAssets.value > 0){
+    netWorth.value = userAssets.value * currentPrice.value;
+    console.log(netWorth.value)
+    userFunds.value = userFunds.value + (parseInt(currentPrice.value)* userAssets.value);
+    userAssets.value = userAssets.value - userAssets.value;
+
   }
 }
 </script>
@@ -1168,6 +1189,10 @@ section {
               border-radius: 10px;
               padding: 4px 20px;
               text-shadow: 0px 0px 8.5px rgba(0, 213, 255, 0.69);
+            }
+            input {
+              width: 120px;
+              height: 22px;
             }
           }
         }
