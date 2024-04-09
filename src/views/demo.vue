@@ -120,7 +120,9 @@
       <div class="action-wrap">
         <div class="action-stats">
           <div class="status">Your Net Worth +17%</div>
-          <div class="amt-wrap">423,123.12</div>
+          <div class="amt-wrap">
+            {{ isNaN(userNetWorth.toFixed(2)) ? "-" : userNetWorth.toFixed(2) }}
+          </div>
           <div class="amt-wrap-2">
             <div class="wrap">
               <div class="label">Amount:</div>
@@ -133,12 +135,13 @@
           </div>
         </div>
         <div class="action-buttons">
-          <button class="limit">
-            <img src="../assets/limit-icon.png" alt="">
-            Limit
+          <button class="limit" @click="marketType = !marketType">
+            <img src="../assets/limit-icon.png" alt="" />
+            <span v-if="marketType">Limit </span>
+            <span v-else>Market</span>
           </button>
-          <button class="buy">Buy</button>
-          <button class="sell">Sell</button>
+          <button class="buy" @click="buy()">Buy</button>
+          <button class="sell" @click="sell()">Sell</button>
         </div>
       </div>
     </div>
@@ -153,9 +156,9 @@
         </div>
         <div class="user-stats">
           <label for="">Assets:</label>
-          <div class="amt">0.005 SOL</div>
+          <div class="amt">{{ userAssets.toFixed(2) }} SOL</div>
           <label for="">Your Funds:</label>
-          <div class="amt">100000.00 USD</div>
+          <div class="amt">{{ userFunds.toFixed(2) }} USD</div>
         </div>
         <div class="user-icon">
           <img src="../assets/stats-user.png" alt="" />
@@ -236,7 +239,6 @@ let array = [
   },
 ];
 let eventList = ref(array);
-
 
 const data = ref([
   {
@@ -720,21 +722,40 @@ setInterval(() => {
   // // console.log(newList);
 
   data.value = newList;
-  currentPrice = (data.value[data.value.length - 1].close).toFixed(2);
+  currentPrice.value = data.value[data.value.length - 1].close.toFixed(2);
+  netWorth.value = userAssets.value * currentPrice.value;
+
 
   // console.log(data.value[data.value.length - 1].time);
-}, 5000);
+}, 1000);
 
 //Set initial current price
-let currentPrice = data.value[data.value.length - 1].close;
+let currentPrice = ref(data.value[data.value.length - 1].close);
 
 //User data
 let userFunds = ref(100000);
 let userAssets = ref(0);
-let userNetWorth = ref(0);
+let netWorth = ref(userAssets * currentPrice);
+let userNetWorth = ref(netWorth);
+let marketType = ref(true);
 
-let marketType = true;
+function buy() {
+  console.log("buy");
+  if(userFunds.value > parseInt(currentPrice.value)  ){
+    userAssets.value = userAssets.value + 1;
+    userFunds.value = userFunds.value - currentPrice.value  ;
+    console.log(netWorth.value);
+  }  
+}
 
+function sell() {
+  if(userAssets.value > 0){
+    userAssets.value = userAssets.value - 1;
+    console.log(userFunds.value, currentPrice.value)
+    userFunds.value = userFunds.value + parseInt(currentPrice.value)   ;
+    console.log(netWorth.value);
+  }  
+}
 </script>
 
 <style lang="scss" scoped>
@@ -863,8 +884,7 @@ section {
         color: #00ff3c;
         font-weight: bold;
         font-size: 26px;
-        text-shadow: 0px 0px 8.6px #00FF3C;
-
+        text-shadow: 0px 0px 8.6px #00ff3c;
       }
 
       .mode {
@@ -879,7 +899,6 @@ section {
         text-align: center;
         box-shadow: inset 0px 2px 4px 0px #000000;
         text-shadow: 0px 0px 8.5px rgba(0, 213, 255, 0.69);
-
       }
     }
 
@@ -978,7 +997,7 @@ section {
           color: #00ff3c;
           font-weight: bold;
           font-size: 26px;
-          text-shadow: 0px 0px 8.6px #00FF3C;
+          text-shadow: 0px 0px 8.6px #00ff3c;
         }
 
         .amt-wrap {
@@ -1011,8 +1030,7 @@ section {
               background-color: #1e1e1e;
               border-radius: 10px;
               padding: 4px 20px;
-          text-shadow: 0px 0px 8.5px rgba(0, 213, 255, 0.69);
-
+              text-shadow: 0px 0px 8.5px rgba(0, 213, 255, 0.69);
             }
           }
         }
@@ -1039,27 +1057,26 @@ section {
         }
 
         button:active {
-          box-shadow: inset 1px 1px 4px 0px #000000;          
+          box-shadow: inset 1px 1px 4px 0px #000000;
         }
 
-        .limit{
+        .limit {
           text-transform: capitalize;
           display: flex;
           align-items: center;
           gap: 10px;
           font-size: 18px;
           justify-content: center;
-          background-image: linear-gradient(180deg, #00E0FF, #004699);
-          
-          img{
+          background-image: linear-gradient(180deg, #00e0ff, #004699);
+
+          img {
             width: 20px;
           }
         }
 
         .buy {
           // background-color: #009924;
-          background-image: linear-gradient(180deg, #00FF3C, #009924);
-          
+          background-image: linear-gradient(180deg, #00ff3c, #009924);
         }
 
         .sell {
@@ -1100,8 +1117,8 @@ section {
         width: 100%;
       }
 
-      .skill-wrap .skill2{
-        box-shadow: 0px 0px 10px 0px #00FF38;  
+      .skill-wrap .skill2 {
+        box-shadow: 0px 0px 10px 0px #00ff38;
       }
 
       .user-stats {
