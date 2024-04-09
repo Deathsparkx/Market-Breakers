@@ -119,7 +119,7 @@
       <img class="action-bg" src="../assets/action-bg.png" alt="" />
       <div class="action-wrap">
         <div class="action-stats">
-          <div class="status">Your Net Worth +17%</div>
+          <div class="status">Your Net Worth</div>
           <div class="amt-wrap">
             {{ isNaN(userNetWorth.toFixed(2)) ? "-" : userNetWorth.toFixed(2) }}
           </div>
