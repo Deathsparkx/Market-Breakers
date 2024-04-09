@@ -106,9 +106,9 @@
       </div>
       <div class="event-wrap">
         <div class="market-event">
-          <div v-for="i in eventList" class="event">
-            <div>{{ i.date }} :</div>
-            <div>{{ i.event }}</div>
+          <div v-for="i in newsList" class="event">
+            <div>{{ i.date }}:</div>
+            <div>{{ i.headline }}</div>
           </div>
         </div>
       </div>
@@ -210,32 +210,158 @@ const priceScaleOption = {
 
 let array = [
   {
-    date: "22/05/2024",
-    event: "A hacker has found an exploit in SOL",
+    headline:
+      "Solana Foundation Launches Educational Initiative to Foster Blockchain Literacy",
+    date: "2023/11/01",
   },
   {
-    date: "22/05/2024",
-    event: "A hacker has found an exploit in SOL",
+    headline:
+      "Solana Staking Rewards Attracting More Participants, Bolstering Network Security",
+    date: "2023/11/05",
   },
   {
-    date: "22/05/2024",
-    event: "A hacker has found an exploit in SOL",
+    headline:
+      "Solana's Cross-Chain Compatibility Sparks Interest Among Developers and Investors Alike",
+    date: "2023/11/10",
   },
   {
-    date: "22/05/2024",
-    event: "A hacker has found an exploit in SOL",
+    headline:
+      "Solana Ventures into Metaverse Space with Ambitious Projects and Partnerships",
+    date: "2023/11/15",
   },
   {
-    date: "22/05/2024",
-    event: "A hacker has found an exploit in SOL",
+    headline:
+      "Solana Eclipses Competitors in Terms of Transactions Per Second, Establishing Itself as a Leading Blockchain Platform",
+    date: "2023/11/20",
   },
   {
-    date: "22/05/2024",
-    event: "A hacker has found an exploit in SOL",
+    headline:
+      "Blockchain Experts Laud Solana's Security Features, Paving the Way for Mainstream Adoption",
+    date: "2023/11/25",
   },
   {
-    date: "22/05/2024",
-    event: "A hacker has found an exploit in SOL",
+    headline:
+      "Solana Smart Contracts Set to Revolutionize the Way Businesses Operate",
+    date: "2023/11/30",
+  },
+  {
+    headline:
+      "Renowned Investor Bullish on Solana, Predicts Long-Term Growth Potential",
+    date: "2023/12/05",
+  },
+  {
+    headline:
+      "Solana Community Celebrates One Year Anniversary with Exciting Developments and Achievements",
+    date: "2023/12/10",
+  },
+  {
+    headline:
+      "Solana Foundation Allocates Funds for Research and Development, Driving Innovation in the Blockchain Space",
+    date: "2023/12/15",
+  },
+  {
+    headline:
+      "DeFi Projects Flock to Solana for Lower Fees and Faster Transactions",
+    date: "2023/12/20",
+  },
+  {
+    headline:
+      "Solana's Market Cap Surpasses $100 Billion Milestone, Cementing Its Position Among Top Cryptocurrencies",
+    date: "2023/12/25",
+  },
+  {
+    headline:
+      "Experts Predict Bright Future for Solana Ecosystem, Citing Innovative Features",
+    date: "2023/12/30",
+  },
+  {
+    headline:
+      "Solana Foundation Announces Partnership with Leading Tech Firm for Blockchain Integration",
+    date: "2024/01/04",
+  },
+  {
+    headline:
+      "Solana-Based Gaming Platform Gains Traction, Attracting Gamers Worldwide",
+    date: "2024/01/09",
+  },
+  {
+    headline:
+      "Institutional Investors Show Increasing Interest in Solana's Potential",
+    date: "2024/01/14",
+  },
+  {
+    headline:
+      "Solana Network Upgrade Brings Enhanced Scalability and Efficiency",
+    date: "2024/01/19",
+  },
+  {
+    headline:
+      "Major NFT Marketplace Embraces Solana, Driving Demand for SOL Tokens",
+    date: "2024/01/24",
+  },
+  {
+    headline: "Solana Achieves All-Time High Amidst Bullish Market Sentiment",
+    date: "2024/01/29",
+  },
+  {
+    headline:
+      "Solana's Transaction Volume Surges as Users Embrace Its Low Fees and High Speed",
+    date: "2024/02/03",
+  },
+  {
+    headline:
+      "Solana-Based DAOs Gain Popularity as Decentralized Governance Takes Center Stage",
+    date: "2024/02/08",
+  },
+  {
+    headline:
+      "Solana-Powered DEX Sees Record-Breaking Trading Volume, Surpassing Competitors",
+    date: "2024/02/13",
+  },
+  {
+    headline:
+      "Solana Integrates Layer-2 Solution, Enhancing Scalability and Reducing Gas Fees",
+    date: "2024/02/18",
+  },
+  {
+    headline:
+      "Solana NFT Marketplace Flourishes with Unique Digital Artwork and Collectibles",
+    date: "2024/02/23",
+  },
+  {
+    headline:
+      "Solana Surpasses 10 Million Active Addresses, Demonstrating Growing Adoption",
+    date: "2024/02/28",
+  },
+  {
+    headline:
+      "Solana Ecosystem Expands with Launch of New DeFi Protocols and Projects",
+    date: "2024/03/04",
+  },
+  {
+    headline:
+      "Solana Foundation Launches Grants Program to Support Developer Community",
+    date: "2024/03/09",
+  },
+  {
+    headline:
+      "Solana Forms Strategic Partnership with Leading Tech Consortium for Cross-Chain Integration",
+    date: "2024/03/14",
+  },
+  {
+    headline:
+      "Solana Enters Strategic Collaboration with Major Gaming Studio for Blockchain Gaming Initiatives",
+    date: "2024/03/19",
+  },
+  {
+    headline:
+      "Solana-Powered NFT Platform Hosts Exclusive Digital Art Auction, Attracting Collectors Worldwide",
+    date: "2024/03/24",
+  },
+  {
+    headline:
+      "Solana Mainnet Upgrade Implements Enhanced Privacy Features and Performance Optimizations",
+    date: "2024/03/29",
   },
 ];
 let eventList = ref(array);
@@ -711,6 +837,8 @@ function generateNextCandlestick(data) {
 // Usage example:
 const nextCandlestick = generateNextCandlestick(data.value);
 console.log(nextCandlestick);
+let newsList = reactive([]);
+let currentNews = ref(0);
 
 setInterval(() => {
   const nextCandlestick = generateNextCandlestick(data.value);
@@ -719,14 +847,21 @@ setInterval(() => {
 
   let newList = [...data.value];
 
-  // // console.log(newList);
-
   data.value = newList;
+
   currentPrice.value = data.value[data.value.length - 1].close.toFixed(2);
   netWorth.value = userAssets.value * currentPrice.value;
+}, 5000);
 
+let generateNews = setInterval(() => {
+  newsList.unshift(eventList.value[currentNews.value]);
 
-  // console.log(data.value[data.value.length - 1].time);
+  if (currentNews.value < 30) {
+    currentNews.value = currentNews.value + 1;
+  } else {
+    currentNews.value = 0;
+    clearInterval(generateNews);
+  }
 }, 1000);
 
 //Set initial current price
@@ -741,20 +876,22 @@ let marketType = ref(true);
 
 function buy() {
   console.log("buy");
-  if(userFunds.value > parseInt(currentPrice.value)  ){
+  if (userFunds.value > parseInt(currentPrice.value)) {
     userAssets.value = userAssets.value + 1;
-    userFunds.value = userFunds.value - currentPrice.value  ;
-    console.log(netWorth.value);
-  }  
+    userFunds.value = userFunds.value - currentPrice.value;
+    netWorth.value = userAssets.value * currentPrice.value;
+    // console.log(netWorth.value);
+  }
 }
 
 function sell() {
-  if(userAssets.value > 0){
+  if (userAssets.value > 0) {
     userAssets.value = userAssets.value - 1;
-    console.log(userFunds.value, currentPrice.value)
-    userFunds.value = userFunds.value + parseInt(currentPrice.value)   ;
-    console.log(netWorth.value);
-  }  
+    // console.log(userFunds.value, currentPrice.value);
+    netWorth.value = userAssets.value * currentPrice.value;
+    userFunds.value = userFunds.value + parseInt(currentPrice.value);
+    // console.log(netWorth.value);
+  }
 }
 </script>
 
