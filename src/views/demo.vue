@@ -862,7 +862,7 @@ let generateNews = setInterval(() => {
     currentNews.value = 0;
     clearInterval(generateNews);
   }
-}, 1000);
+}, 4000);
 
 //Set initial current price
 let currentPrice = ref(data.value[data.value.length - 1].close);
