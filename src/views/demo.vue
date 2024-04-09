@@ -20,7 +20,7 @@
                 <img src="../assets/p2-skill2.png" alt="" />
               </div>
             </div>
-            <div class="amt">100,00 USD</div>
+            <div class="amt">100,000 USD</div>
           </div>
         </div>
       </div>
@@ -38,7 +38,7 @@
                 <img src="../assets/p3-skill2.png" alt="" />
               </div>
             </div>
-            <div class="amt">100,00 USD</div>
+            <div class="amt">100,000 USD</div>
           </div>
         </div>
       </div>
@@ -56,7 +56,7 @@
                 <img src="../assets/p4-skill2.png" alt="" />
               </div>
             </div>
-            <div class="amt">100,00 USD</div>
+            <div class="amt">100,000 USD</div>
           </div>
         </div>
       </div>
@@ -77,21 +77,21 @@
         <div class="data-wrap">
           <div class="data">
             <div class="label">Current Price:</div>
-            <div>523.99 USD</div>
+            <div>179.26 USD</div>
           </div>
           <div class="data">
             <div class="label">All Time High:</div>
-            <div>523.99 USD</div>
+            <div>260.06 USD</div>
           </div>
           <div class="data">
             <div class="label">All Time Low:</div>
-            <div>523.99 USD</div>
+            <div>0.5052 USD</div>
           </div>
         </div>
         <div class="data-wrap">
           <div class="data">
             <div class="label">Month total Volume:</div>
-            <div>3.23 PEPE</div>
+            <div>445,571,039 SOL</div>
           </div>
           <div>
             <img class="meter" src="../assets/meter.png" alt="" />
@@ -118,7 +118,7 @@
           <div class="amt-wrap-2">
             <div class="wrap">
               <div class="label">Amount:</div>
-              <div class="amt">400.00</div>
+              <div class="amt">400.00 USD</div>
             </div>
             <!-- <div class="wrap">
               <div class="label">Limit:</div>
@@ -147,9 +147,9 @@
         </div>
         <div class="user-stats">
           <label for="">Assets:</label>
-          <div class="amt">0.005 PEPE</div>
+          <div class="amt">0.005 SOL</div>
           <label for="">Your Funds:</label>
-          <div class="amt">1235.21 USD</div>
+          <div class="amt">100000.00 USD</div>
         </div>
         <div class="user-icon">
           <img src="../assets/stats-user.png" alt="" />
@@ -165,31 +165,31 @@ import { ref } from "vue";
 let array = [
   {
     date: "22/05/2024",
-    event: "A hacker has found an exploit in pepecoins",
+    event: "A hacker has found an exploit in SOL",
   },
   {
     date: "22/05/2024",
-    event: "A hacker has found an exploit in pepecoins",
+    event: "A hacker has found an exploit in SOL",
   },
   {
     date: "22/05/2024",
-    event: "A hacker has found an exploit in pepecoins",
+    event: "A hacker has found an exploit in SOL",
   },
   {
     date: "22/05/2024",
-    event: "A hacker has found an exploit in pepecoins",
+    event: "A hacker has found an exploit in SOL",
   },
   {
     date: "22/05/2024",
-    event: "A hacker has found an exploit in pepecoins",
+    event: "A hacker has found an exploit in SOL",
   },
   {
     date: "22/05/2024",
-    event: "A hacker has found an exploit in pepecoins",
+    event: "A hacker has found an exploit in SOL",
   },
   {
     date: "22/05/2024",
-    event: "A hacker has found an exploit in pepecoins",
+    event: "A hacker has found an exploit in SOL",
   },
 ];
 let eventList = ref(array);
@@ -268,7 +268,7 @@ section {
         padding-left: 5%;
       }
       color: white;
-      font-size: 1.1vw;
+      font-size: 1vw;
     }
   }
   .graph-component {
@@ -344,7 +344,7 @@ section {
     .market-data {
       color: white;
       background: rgba(255, 255, 255, 0.1);
-      width: 40%;
+      width: 45%;
       display: flex;
       font-size: 23px;
       font-weight: bold;
@@ -585,12 +585,13 @@ section {
       }
 
       .amt {
-        font-size: 22px;
+        font-size: 18px;
         color: #ffc629;
         background-color: #1e1e1e;
         border-radius: 10px;
         padding: 4px 20px;
         margin-bottom: 10px;
+        text-align: end;
       }
     }
   }
