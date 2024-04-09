@@ -68,6 +68,11 @@
   </section>
   <section class="sec-2">
     <div class="sec-2-content">
+      <div class="mode-wrap">
+        <div class="status">Current Mode</div>
+        <div class="mode">Low Stakes</div>
+        <div class="mode">Ranked</div>
+      </div>
       <div class="market-data">
         <div class="data-wrap">
           <div class="data">
@@ -112,16 +117,20 @@
           <div class="amt-wrap">423,123.12</div>
           <div class="amt-wrap-2">
             <div class="wrap">
-              <div class="label">Market:</div>
+              <div class="label">Amount:</div>
               <div class="amt">400.00</div>
             </div>
-            <div class="wrap">
+            <!-- <div class="wrap">
               <div class="label">Limit:</div>
               <div class="amt">800.00</div>
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="action-buttons">
+          <button class="limit">
+            <img src="../assets/limit-icon.png" alt="">
+            Limit
+          </button>
           <button class="buy">Buy</button>
           <button class="sell">Sell</button>
         </div>
@@ -134,11 +143,11 @@
           <img src="../assets/stats-skill1.png" alt="" />
         </div>
         <div class="skill-wrap">
-          <img src="../assets/stats-skill2.png" alt="" />
+          <img class="skill2" src="../assets/stats-skill2.png" alt="" />
         </div>
         <div class="user-stats">
           <label for="">Assets:</label>
-          <div class="amt">0.005 USDT</div>
+          <div class="amt">0.005 PEPE</div>
           <label for="">Your Funds:</label>
           <div class="amt">1235.21 USD</div>
         </div>
@@ -228,7 +237,7 @@ section {
       display: flex;
 
       .player-img-wrap {
-        width: 34%;
+        width: 43%;
       }
       .player-img {
         max-width: 100%;
@@ -259,7 +268,7 @@ section {
         padding-left: 5%;
       }
       color: white;
-      font-size: 1.2vw;
+      font-size: 1.1vw;
     }
   }
   .graph-component {
@@ -291,10 +300,46 @@ section {
   margin-top: 5%;
 
   .sec-2-content {
-    max-width: 70%;
-    margin: auto;
+    max-width: 90%;
+    // margin: auto;
     display: flex;
     max-height: 200px;
+
+    .mode-wrap {
+      background-image: linear-gradient(180deg, #5a6a7e, #5a6a7e, #323a46);
+      border-radius: 10px;
+      text-align: center;
+      width: 450px;
+      margin-right: 2%;
+      display: flex;
+      flex-direction: column;
+      // justify-content: center;
+      padding-top: 20px;
+      align-items: center;
+
+      .status {
+        color: #00ff3c;
+        font-weight: bold;
+        font-size: 26px;
+        text-shadow: 0px 0px 8.6px #00FF3C;
+
+      }
+
+      .mode {
+        font-size: 22px;
+        color: white;
+        width: 100%;
+        background-color: #1e1e1e;
+        border-radius: 10px;
+        padding: 4px 10px;
+        margin-top: 16px;
+        width: 80%;
+        text-align: center;
+        box-shadow: inset 0px 2px 4px 0px #000000;
+        text-shadow: 0px 0px 8.5px rgba(0, 213, 255, 0.69);
+
+      }
+    }
 
     .market-data {
       color: white;
@@ -322,7 +367,7 @@ section {
         }
       }
       img {
-        width: 80%;
+        width: 100%;
       }
     }
 
@@ -391,6 +436,7 @@ section {
           color: #00ff3c;
           font-weight: bold;
           font-size: 26px;
+          text-shadow: 0px 0px 8.6px #00FF3C;
         }
 
         .amt-wrap {
@@ -403,6 +449,7 @@ section {
           margin: 16px 0;
           width: 80%;
           text-align: center;
+          text-shadow: 0px 0px 8.5px rgba(0, 213, 255, 0.69);
         }
         .amt-wrap-2 {
           display: flex;
@@ -418,37 +465,63 @@ section {
             .amt {
               font-size: 22px;
               color: white;
-            //   width: 100%;
+              //   width: 100%;
               background-color: #1e1e1e;
               border-radius: 10px;
               padding: 4px 20px;
+          text-shadow: 0px 0px 8.5px rgba(0, 213, 255, 0.69);
+
             }
           }
         }
       }
 
       .action-buttons {
-        margin-left: 30px;
+        margin-left: -120px;
         height: 100%;
         display: flex;
         align-items: end;
-        padding-bottom:  25px;
-        gap: 16px;
-        button{
-            border-radius: 10px;
-            color: white;
-            font-size: 22px;
-            text-transform: uppercase;
-            width: 100px;
-            padding: 6px 0;
+        padding-bottom: 25px;
+        gap: 20px;
+        button {
+          border-radius: 10px;
+          color: white;
+          font-size: 22px;
+          text-transform: uppercase;
+          width: 120px;
+          padding: 6px 0;
+          box-shadow: 0px 2px 4px 0px #00000077;
+          border: none;
+          height: 42px;
+          font-weight: bold;
         }
 
-        .buy{
-            background-color: #009924;
+        button:active {
+          box-shadow: inset 1px 1px 4px 0px #000000;          
         }
 
-        .sell{
-            background-color: red;
+        .limit{
+          text-transform: capitalize;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          font-size: 18px;
+          justify-content: center;
+          background-image: linear-gradient(180deg, #00E0FF, #004699);
+          
+          img{
+            width: 20px;
+          }
+        }
+
+        .buy {
+          // background-color: #009924;
+          background-image: linear-gradient(180deg, #00FF3C, #009924);
+          
+        }
+
+        .sell {
+          background-color: red;
         }
       }
     }
@@ -476,8 +549,8 @@ section {
       justify-content: end;
       align-items: end;
 
-      .skill-wrap{
-        width:70px;
+      .skill-wrap {
+        width: 70px;
         margin: 16px 10px;
       }
 
@@ -485,11 +558,15 @@ section {
         width: 100%;
       }
 
-      .user-stats{
-        margin:  10px;
+      .skill-wrap .skill2{
+        box-shadow: 0px 0px 10px 0px #00FF38;  
       }
 
-      .user-icon{
+      .user-stats {
+        margin: 10px;
+      }
+
+      .user-icon {
         width: 160px;
         height: 100%;
         display: flex;
@@ -501,20 +578,20 @@ section {
         width: 100%;
       }
 
-      label{
+      label {
         color: white;
         font-size: 16px;
         margin-top: 10px;
       }
 
       .amt {
-            font-size: 22px;
-            color: #FFC629;
-            background-color: #1e1e1e;
-            border-radius: 10px;
-            padding: 4px 20px;
-            margin-bottom: 10px;
-        }
+        font-size: 22px;
+        color: #ffc629;
+        background-color: #1e1e1e;
+        border-radius: 10px;
+        padding: 4px 20px;
+        margin-bottom: 10px;
+      }
     }
   }
 }
